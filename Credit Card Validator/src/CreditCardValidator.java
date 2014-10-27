@@ -5,6 +5,8 @@ public class CreditCardValidator
 	{
 	static long cardNumber;
 	static long [ ] rawNumbers = new long [16];
+	static long [ ] numbersToAdd = new long [16];
+
 	
 	public static void main(String[] args)
 		{
@@ -38,8 +40,30 @@ public class CreditCardValidator
 	
 	public static void validateCCNumber()
 		{
-		
+		for (int i = 0; i < 16; i++)
+			{
+			if (i % 2 == 0)
+				{
+				numbersToAdd[i] = rawNumbers[i];
+				}
+			else
+				{
+				if (rawNumbers[i] * 2 < 10)
+					{
+					numbersToAdd[i] = rawNumbers[i] * 2;
+					}
+				else
+					{
+					addDigitsOfDoubledNumber();
+					}
+				}
+			}
 		}
 	
-
+	public static int addDigitsOfDoubledNumber()
+		{
+		
+		return adjustedDoubledNumber;
+		}
+	
 	}
