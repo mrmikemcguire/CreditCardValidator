@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class CreditCardValidator
 	{
-	static String cardNumber;
-	static ArrayList <String> numberArray = new ArrayList <String>();
+	static long cardNumber;
+	static long [ ] rawNumbers = new long [16];
 	
 	public static void main(String[] args)
 		{
@@ -13,23 +13,24 @@ public class CreditCardValidator
 		//validateCCNumber();
 		}
 	
-	public static String acceptCCNumber()
+	public static long acceptCCNumber()
 		{
 		Scanner userInput = new Scanner(System.in);
 		System.out.println("Please input the credit card number without spaces.");
-		cardNumber = userInput.nextLine();
+		cardNumber = userInput.nextLong();
+		System.out.println("Your credit card # is " + cardNumber);
 		return cardNumber;
 		}
 	
 	public static void loadArray()
 		{
-		for (int i = 0; i < cardNumber.length(); i++)
+		for (int i = 0; i < 16; i++)
 			{
-			numberArray.add(cardNumber.substring(i, i + 1));
+			rawNumbers[i] = cardNumber % 10;
+			cardNumber = cardNumber / 10;
 			}
-		
-		
-		for(String fred : numberArray)
+			
+		for(long fred : rawNumbers)
 			{
 			System.out.println(fred);
 			}
@@ -39,5 +40,6 @@ public class CreditCardValidator
 		{
 		
 		}
+	
 
 	}
