@@ -1,18 +1,19 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class CreditCardValidator
 	{
 	static long cardNumber;
-	static long [ ] rawNumbers = new long [16];
-	static long [ ] numbersToAdd = new long [16];
-
+	static boolean validity;
+	static int [ ] rawNumbers = new int [16];
+	static int [ ] numbersToAdd = new int [16];
 	
 	public static void main(String[] args)
 		{
 		acceptCCNumber();
 		loadArray();
-		//validateCCNumber();
+		modifyCCNumber();
+		validateCCNumber();
+		displayResult();
 		}
 	
 	public static long acceptCCNumber()
@@ -38,7 +39,7 @@ public class CreditCardValidator
 			}
 		}
 	
-	public static void validateCCNumber()
+	public static void modifyCCNumber()
 		{
 		for (int i = 0; i < 16; i++)
 			{
@@ -54,16 +55,41 @@ public class CreditCardValidator
 					}
 				else
 					{
-					addDigitsOfDoubledNumber();
+					int doubledNumber = rawNumbers[i] * 2;
+					int onesDigit = doubledNumber % 10;
+					int tensDigit = doubledNumber / 10;
+					numbersToAdd[i] = onesDigit + tensDigit;
 					}
 				}
 			}
 		}
 	
-	public static int addDigitsOfDoubledNumber()
+	public static boolean validateCCNumber()
 		{
-		
-		return adjustedDoubledNumber;
+		int total = 0;
+		for (int wilma : numbersToAdd)
+			{
+			total += wilma;
+			}
+		if (total % 10 == 0)
+			{
+			validity = true;
+			}
+		return validity;
 		}
+	
+	public static void displayResult()
+		{
+		System.out.print("The credit card number " + cardNumber + " is ");
+		if (validity == true)
+			{
+			System.out.print("potentially valid.");
+			}
+		else
+			{
+			System.out.print("invalid.");
+			}
+		}
+	
 	
 	}
