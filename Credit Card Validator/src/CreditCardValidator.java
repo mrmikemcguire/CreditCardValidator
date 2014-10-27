@@ -4,8 +4,8 @@ public class CreditCardValidator
 	{
 	static long cardNumber;
 	static boolean validity;
-	static int [ ] rawNumbers = new int [16];
-	static int [ ] numbersToAdd = new int [16];
+	static long [ ] rawNumbers = new long [16];
+	static long [ ] numbersToAdd = new long [16];
 	
 	public static void main(String[] args)
 		{
@@ -32,10 +32,10 @@ public class CreditCardValidator
 			rawNumbers[i] = cardNumber % 10;
 			cardNumber = cardNumber / 10;
 			}
-			
+		System.out.println("The 1st loaded array:");
 		for(long fred : rawNumbers)
 			{
-			System.out.println(fred);
+			System.out.print(fred);
 			}
 		}
 	
@@ -55,19 +55,28 @@ public class CreditCardValidator
 					}
 				else
 					{
-					int doubledNumber = rawNumbers[i] * 2;
-					int onesDigit = doubledNumber % 10;
-					int tensDigit = doubledNumber / 10;
-					numbersToAdd[i] = onesDigit + tensDigit;
+					System.out.println("Raw number is " + rawNumbers[i]);
+					long doubledNumber = rawNumbers[i] * 2;
+					System.out.println("Doubled number is " + doubledNumber);
+					long onesDigit = doubledNumber % 10;
+					System.out.println("One's digit is " + onesDigit);
+					long tensDigit = doubledNumber / 10;
+					System.out.println("Ten's digit is " + tensDigit);
+					System.out.println("Replaced number is " + (onesDigit + tensDigit));
+					numbersToAdd[i] = (onesDigit + tensDigit);
 					}
 				}
+			}
+		for(long bambam : numbersToAdd)
+			{
+			System.out.println(bambam);
 			}
 		}
 	
 	public static boolean validateCCNumber()
 		{
 		int total = 0;
-		for (int wilma : numbersToAdd)
+		for (long wilma : numbersToAdd)
 			{
 			total += wilma;
 			}
