@@ -88,5 +88,6 @@ public class CreditCardValidatorFromFile
 			{
 			System.out.println("invalid.");
 			}
+		validity = false;
 		}		
 	}
