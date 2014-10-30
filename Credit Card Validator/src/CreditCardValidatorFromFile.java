@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class CreditCardValidator
+public class CreditCardValidatorFromFile
 	{
 	static long cardNumber, tempCardNumber;
 	static boolean validity;
