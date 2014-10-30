@@ -12,23 +12,6 @@ public class CreditCardValidatorFromFile
 	
 	public static void main(String[] args) throws IOException
 		{
-//		acceptCCNumber();
-//		loadArray();
-//		modifyCCNumber();
-//		validateCCNumber();
-//		displayResult();
-		readNumbersFromFile();
-		}
-	
-//	public static long acceptCCNumber()
-//		{
-//		Scanner userInput = new Scanner(System.in);
-//		System.out.println("Please input the credit card number without spaces.");
-//		cardNumber = userInput.nextLong();
-//		return cardNumber;
-//		}
-	public static void readNumbersFromFile() throws IOException 
-		{
 		Scanner file = new Scanner (new File ("CreditCardNumbers.txt"));	
 		while(file.hasNext())
 			{
@@ -95,15 +78,15 @@ public class CreditCardValidatorFromFile
 	
 	public static void displayResult()
 		{
-		System.out.println("The credit card number " + cardNumber + " is ");
+		System.out.print("The credit card number " + cardNumber + " is ");
 		if (validity == true)
 			{
-			System.out.print("potentially valid.");
+			System.out.println("potentially valid.");
 			validCCCounter++;
 			}
 		else
 			{
-			System.out.print("invalid.");
+			System.out.println("invalid.");
 			}
 		}		
 	}
