@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CreditCardValidator
@@ -6,22 +8,39 @@ public class CreditCardValidator
 	static boolean validity;
 	static long [ ] rawNumbers = new long [16];
 	static long [ ] numbersToAdd = new long [16];
+	static int validCCCounter = 0;
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 		{
-		acceptCCNumber();
-		loadArray();
-		modifyCCNumber();
-		validateCCNumber();
-		displayResult();
+//		acceptCCNumber();
+//		loadArray();
+//		modifyCCNumber();
+//		validateCCNumber();
+//		displayResult();
+		readNumbersFromFile();
 		}
 	
-	public static long acceptCCNumber()
+//	public static long acceptCCNumber()
+//		{
+//		Scanner userInput = new Scanner(System.in);
+//		System.out.println("Please input the credit card number without spaces.");
+//		cardNumber = userInput.nextLong();
+//		return cardNumber;
+//		}
+	public static void readNumbersFromFile() throws IOException 
 		{
-		Scanner userInput = new Scanner(System.in);
-		System.out.println("Please input the credit card number without spaces.");
-		cardNumber = userInput.nextLong();
-		return cardNumber;
+		Scanner file = new Scanner (new File ("CreditCardNumbers.txt"));	
+		while(file.hasNext())
+			{
+			cardNumber = file.nextLong();
+			loadArray();
+			modifyCCNumber();
+			validateCCNumber();
+			displayResult();
+			}
+		
+		System.out.println("\nThis list contains " + validCCCounter
+				+ " potentially valid credit card numbers.");
 		}
 	
 	public static void loadArray()
@@ -66,8 +85,6 @@ public class CreditCardValidator
 			{
 			total += wilma;
 			}
-		System.out.println();
-		System.out.println("The sum of all digits is " + total);
 		
 		if (total % 10 == 0)
 			{
@@ -82,6 +99,7 @@ public class CreditCardValidator
 		if (validity == true)
 			{
 			System.out.print("potentially valid.");
+			validCCCounter++;
 			}
 		else
 			{
