@@ -79,7 +79,7 @@ public class CreditCardValidatorFromFile
 	public static void displayResult()
 		{
 		System.out.print("The credit card number " + cardNumber + " is ");
-		if (validity == true)
+		if (validity)
 			{
 			System.out.println("potentially valid.");
 			validCCCounter++;
