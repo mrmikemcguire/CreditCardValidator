@@ -12,7 +12,7 @@ public class CreditCardValidatorFromFile
 	
 	public static void main(String[] args) throws IOException
 		{
-		Scanner file = new Scanner (new File ("creditCardNumbers2.txt"));	
+		Scanner file = new Scanner (new File ("creditCardNumbers.txt"));	
 		while(file.hasNext())
 			{
 			cardNumber = file.nextLong();
