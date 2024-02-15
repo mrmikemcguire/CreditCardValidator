@@ -1,34 +1,35 @@
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
+import java.util.ArrayList;
 
-public class CreditCardValidatorFromFile
+public class GenerateCreditCards
 	{
-	static long cardNumber, tempCardNumber;
+	static long cardNumber, tempCardNumber, possibleNum;
 	static boolean validity;
+	static boolean stillGenerating = true;
 	static long [ ] rawNumbers = new long [16];
 	static long [ ] numbersToAdd = new long [16];
-	static int validCCCounter = 0;
+	static ArrayList<Long> validCards = new ArrayList<Long>();
 	
-	public static void main(String[] args) throws IOException
+	public static void main(String[] args)
 		{
-		Scanner file = new Scanner (new File ("creditCardNumbers.txt"));	
-		while(file.hasNext())
+		while(stillGenerating)
 			{
-			cardNumber = file.nextLong();
+			generateCC();
 			loadArray();
 			modifyCCNumber();
 			validateCCNumber();
-			displayResult();
+			loadValidCards();
 			}
-		
-		System.out.println("\nThis list contains " + validCCCounter
-				+ " potentially valid credit card numbers.");
+		}
+	
+	public static long generateCC()
+		{
+		possibleNum = (long)(Math.random()*((long)(Math.pow(10,15)*9))+(long)(Math.pow(10,15)));
+		return possibleNum;
 		}
 	
 	public static void loadArray()
 		{
-		tempCardNumber = cardNumber;
+		tempCardNumber = generateCC();
 		for (int i = 0; i < 16; i++)
 			{
 			rawNumbers[i] = tempCardNumber % 10;
@@ -76,18 +77,25 @@ public class CreditCardValidatorFromFile
 		return validity;
 		}
 	
-	public static void displayResult()
+	public static void loadValidCards()
 		{
-		System.out.print("The credit card number " + cardNumber + " is ");
-		if (validity)
+		if(validateCCNumber())
 			{
-			System.out.println("potentially valid.");
-			validCCCounter++;
+			validCards.add(possibleNum);
 			}
-		else
+		if(validCards.size() == 100)
 			{
-			System.out.println("invalid.");
+			stillGenerating = false;
+			displayValidCards();
 			}
-		validity = false;
-		}		
+		}
+	
+	public static void displayValidCards()
+		{
+		System.out.println("Here are one hundred potentially valid credit card numbers:\n");
+		for(Long l : validCards)
+			{
+			System.out.println(l);
+			}
+		}
 	}
